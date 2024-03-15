@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import Accordion from '../Accordion/Accordion';
+import Accordion from '../Accordion';
+import {Wrapper} from './style';
 
 const mockData = [
   {
-    name: 'General Tech',
+    name: 'Profile Task',
     tasks: [
       {
         description: 'Add name and surname',
@@ -28,7 +29,32 @@ const mockData = [
     ]
   },
   {
-    name: 'General Socials',
+    name: 'General Task',
+    tasks: [
+      {
+        description: 'Add name and surname',
+        value: 10,
+        checked: true
+      },
+      {
+        description: 'Add email',
+        value: 15,
+        checked: false
+      },
+      {
+        description: 'Add linkedin profile',
+        value: 8,
+        checked: false
+      },
+      {
+        description: 'Provide websites page url',
+        value: 5,
+        checked: true
+      }
+    ]
+  },
+  {
+    name: 'Finance Task',
     tasks: [
       {
         description: 'Add name and surname',
@@ -98,10 +124,10 @@ const App = () => {
   const progress = calculateProgress();
 
   return (
-    <div>
+    <Wrapper>
       <h1>Task Progress: {loading ? 'Loading...' : `${Math.round(parseInt(progress))}%`}</h1>
       <Accordion data={tasksData} onToggle={handleToggle} />
-    </div>
+    </Wrapper>
   );
 };
 

@@ -126,11 +126,18 @@ const App = () => {
 
   return (
     <Wrapper>
-      <div className='progress-bar-wrapper'>
-        <h1>Lodgify Grouped Tasks</h1>
-        <ProgressBar completed={60} baseBgColor='#E6FDF9' bgColor='#02BC9C' />
-      </div>
-      <Accordion data={tasksData} onToggle={handleToggle} />
+      {loading ? (
+        <div>Loading data. Please wait...</div>
+      ) : (
+        <>
+          {' '}
+          <div className='progress-bar-wrapper'>
+            <h1>Lodgify Grouped Tasks</h1>
+            <ProgressBar completed={Math.round(parseInt(progress)) || 0} baseBgColor='#E6FDF9' bgColor='#02BC9C' />
+          </div>
+          <Accordion data={tasksData} onToggle={handleToggle} />
+        </>
+      )}
     </Wrapper>
   );
 };

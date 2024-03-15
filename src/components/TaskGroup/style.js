@@ -2,7 +2,12 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.fieldset`
   border: none;
-  padding: 10px;
+  padding: 0;
+
+  .header-title-wrap {
+    display: flex;
+    align-items: center;
+  }
 
   .expand-button {
     cursor: pointer;
@@ -22,9 +27,14 @@ export const Wrapper = styled.fieldset`
   .group-header {
     display: flex;
     justify-content: space-between;
+    padding: 10px;
   }
 
   .group-content {
-    margin-top: 20px;
+    
+  }
+
+  .clipboard-icon {
+    margin-right: 10px
   }
 `;

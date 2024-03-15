@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import ProgressBar from '@ramonak/react-progress-bar';
 import Accordion from '../Accordion';
 import {Wrapper} from './style';
 
@@ -125,7 +126,10 @@ const App = () => {
 
   return (
     <Wrapper>
-      <h1>Task Progress: {loading ? 'Loading...' : `${Math.round(parseInt(progress))}%`}</h1>
+      <div className='progress-bar-wrapper'>
+        <h1>Lodgify Grouped Tasks</h1>
+        <ProgressBar completed={60} baseBgColor='#E6FDF9' bgColor='#02BC9C' />
+      </div>
       <Accordion data={tasksData} onToggle={handleToggle} />
     </Wrapper>
   );

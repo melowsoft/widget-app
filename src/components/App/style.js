@@ -12,5 +12,12 @@ export const Wrapper = styled.div`
   h1 {yarn add @react-icons/all-files
     margin-top: 10px;
     margin-bottom: 10px;
+    font-size: 24px;
+  }
+
+  .progress-bar-wrapper {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 20px;
   }
 `;

@@ -1,14 +1,18 @@
 import React from 'react';
-import {Wrapper} from './style';
+import { Wrapper, LabelText, Checkbox } from './style';
 
-const Task = ({task, onToggle}) => {
-  const {description, checked} = task;
+const Task = ({ task, onToggle }) => {
+  const { description, checked } = task;
+
+  const handleToggle = () => {
+    onToggle();
+  };
 
   return (
     <Wrapper>
       <label>
-        <input type='checkbox' checked={checked} onChange={onToggle} />
-        <p>{description}</p>
+        <Checkbox type='checkbox' checked={checked} onChange={handleToggle} />
+        <LabelText>{description}</LabelText>
       </label>
     </Wrapper>
   );

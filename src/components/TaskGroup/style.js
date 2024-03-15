@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.fieldset`
-  border: none;
-  padding: 0;
+export const Wrapper = styled.div`
+  & > fieldset {
+    border: none;
+  }
 
   .header-title-wrap {
     display: flex;
@@ -15,26 +16,27 @@ export const Wrapper = styled.fieldset`
     background-color: transparent;
     display: flex;
     align-items: center;
+    color: #999999;
+    font-size: 14px;
+    margin-right: 10px;
+    padding: 0;
 
     & > p {
-        margin: 0;
-        color: #999999;
-        font-size: 14px;
-        margin-right: 10px;
+      margin: 0;
+      margin-right: 10px;
     }
   }
 
   .group-header {
     display: flex;
     justify-content: space-between;
-    padding: 10px;
   }
 
   .group-content {
-    
+    padding: 10px;
   }
 
   .clipboard-icon {
-    margin-right: 10px
+    margin-right: 10px;
   }
 `;

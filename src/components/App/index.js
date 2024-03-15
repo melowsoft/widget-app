@@ -1,101 +1,36 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import ProgressBar from '@ramonak/react-progress-bar';
 import Accordion from '../Accordion';
-import {Wrapper} from './style';
+import { Wrapper } from './style';
 
-const mockData = [
-  {
-    name: 'Profile Task',
-    tasks: [
-      {
-        description: 'Add name and surname',
-        value: 10,
-        checked: true
-      },
-      {
-        description: 'Add email',
-        value: 15,
-        checked: false
-      },
-      {
-        description: 'Add linkedin profile',
-        value: 8,
-        checked: false
-      },
-      {
-        description: 'Provide websites page url',
-        value: 5,
-        checked: true
-      }
-    ]
-  },
-  {
-    name: 'General Task',
-    tasks: [
-      {
-        description: 'Add name and surname',
-        value: 10,
-        checked: true
-      },
-      {
-        description: 'Add email',
-        value: 15,
-        checked: false
-      },
-      {
-        description: 'Add linkedin profile',
-        value: 8,
-        checked: false
-      },
-      {
-        description: 'Provide websites page url',
-        value: 5,
-        checked: true
-      }
-    ]
-  },
-  {
-    name: 'Finance Task',
-    tasks: [
-      {
-        description: 'Add name and surname',
-        value: 10,
-        checked: true
-      },
-      {
-        description: 'Add email',
-        value: 15,
-        checked: false
-      },
-      {
-        description: 'Add linkedin profile',
-        value: 8,
-        checked: false
-      },
-      {
-        description: 'Provide websites page url',
-        value: 5,
-        checked: true
-      }
-    ]
-  }
-];
+const API_URL = 'https://gist.githubusercontent.com/huvber/ba0d534f68e34f1be86d7fe7eff92c96/raw/98a91477905ea518222a6d88dd8b475328a632d3/mock-progress';
 
 const App = () => {
   const [loading, setLoading] = useState(true);
   const [tasksData, setTasksData] = useState([]);
 
   useEffect(() => {
-    setTimeout(() => {
-      setTasksData(mockData);
-      setLoading(false);
-    }, 1000);
+    const fetchData = async () => {
+      try {
+        const response = await fetch(API_URL);
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        const data = await response.json();
+        setTasksData(data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   const handleToggle = toggledTask => {
     const updatedTasksData = tasksData.map(group => ({
       ...group,
-      tasks: group.tasks.map(task => (task === toggledTask ? {...task, checked: !task.checked} : task))
+      tasks: group.tasks.map(task => (task === toggledTask ? { ...task, checked: !task.checked } : task))
     }));
     setTasksData(updatedTasksData);
   };

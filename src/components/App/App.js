@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import Accordion from '../Accordion/Accordion';
 
 const mockData = [
   {
@@ -53,60 +54,14 @@ const mockData = [
   }
 ];
 
-const Task = ({task, onToggle}) => {
-  const {description, checked} = task;
-
-  return (
-    <div>
-      <label>
-        <input type='checkbox' checked={checked} onChange={onToggle} />
-        {description}
-      </label>
-    </div>
-  );
-};
-
-const TaskGroup = ({group, onToggle, index}) => {
-  const [isExpand, setIsExpand] = useState(false);
-  const {name, tasks} = group;
-
-  return (
-    <fieldset>
-      <legend>
-        <h2>{name}</h2>
-      </legend>
-      <div>
-        <button aria-expanded={isExpand} onClick={() => setIsExpand(!isExpand)}>
-          Group {index + 1}
-        </button>
-        {isExpand && (
-          <div>
-            {tasks.map((task, index) => (
-              <Task key={index} task={task} onToggle={() => onToggle(task)} />
-            ))}
-          </div>
-        )}
-      </div>
-    </fieldset>
-  );
-};
-
-const Accordion = ({data, onToggle}) => {
-  return (
-    <div>
-      {data.map((group, index) => (
-        <TaskGroup key={index} index={index} group={group} onToggle={onToggle} />
-      ))}
-    </div>
-  );
-};
-
 const App = () => {
+  const [loading, setLoading] = useState(true);
   const [tasksData, setTasksData] = useState([]);
 
   useEffect(() => {
     setTimeout(() => {
       setTasksData(mockData);
+      setLoading(false);
     }, 1000);
   }, []);
 
@@ -144,7 +99,7 @@ const App = () => {
 
   return (
     <div>
-      <h1>Task Progress: {Math.round(parseInt(progress))}%</h1>
+      <h1>Task Progress: {loading ? 'Loading...' : `${Math.round(parseInt(progress))}%`}</h1>
       <Accordion data={tasksData} onToggle={handleToggle} />
     </div>
   );

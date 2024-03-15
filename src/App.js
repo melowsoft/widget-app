@@ -67,25 +67,27 @@ const Task = ({ task, onToggle }) => {
 };
 
 const TaskGroup = ({ group, onToggle, index }) => {
-  const [isExpand, setIsExpand] = useState(false)
+  const [isExpand, setIsExpand] = useState(false);
   const { name, tasks } = group;
 
   return (
-    <div>
-      <h2>{name}</h2>
+    <fieldset>
+      <legend>
+        <h2>{name}</h2>
+      </legend>
       <div>
-        <h5 onClick={() => setIsExpand(!isExpand)}>Group {index + 1}</h5>
-        {
-          isExpand && (
-            <div>
+        <button aria-expanded={isExpand} onClick={() => setIsExpand(!isExpand)}>
+          Group {index + 1}
+        </button>
+        {isExpand && (
+          <div>
             {tasks.map((task, index) => (
               <Task key={index} task={task} onToggle={() => onToggle(task)} />
             ))}
-              </div>
-          )
-      }
+          </div>
+        )}
       </div>
-    </div>
+    </fieldset>
   );
 };
 
@@ -141,11 +143,10 @@ const App = () => {
 
   return (
     <div>
-      <h1>Task Progress: {Math.round(progress)}%</h1>
+      <h1>Task Progress: {Math.round(parseInt(progress))}%</h1>
       <Accordion data={tasksData} onToggle={handleToggle} />
     </div>
   );
 };
 
 export default App;
-

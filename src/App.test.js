@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
+import {render, fireEvent, screen} from '@testing-library/react';
 import App from './App';
 
 test('renders task progress', () => {
@@ -10,7 +10,7 @@ test('renders task progress', () => {
 
 test('renders task groups and tasks', () => {
   render(<App />);
-  const taskGroups = screen.getAllByRole('heading', { level: 2 });
+  const taskGroups = screen.getAllByRole('heading', {level: 2});
   expect(taskGroups).toHaveLength(2); // Assuming there are 2 task groups
   const tasks = screen.getAllByRole('checkbox');
   expect(tasks).toHaveLength(8); // Assuming there are 8 tasks in total
@@ -25,7 +25,7 @@ test('toggles task completion', () => {
 
 test('expands and collapses task groups', () => {
   render(<App />);
-  const groupHeading = screen.getByRole('heading', { name: /General Tech/i }); // Assuming this group is initially collapsed
+  const groupHeading = screen.getByRole('heading', {name: /General Tech/i}); // Assuming this group is initially collapsed
   expect(groupHeading).toBeInTheDocument();
   fireEvent.click(screen.getByText(/Group 1/i)); // Clicking to expand the group
   const tasks = screen.getAllByRole('checkbox');

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 
 const mockData = [
   {
@@ -53,22 +53,22 @@ const mockData = [
   }
 ];
 
-const Task = ({ task, onToggle }) => {
-  const { description, checked } = task;
+const Task = ({task, onToggle}) => {
+  const {description, checked} = task;
 
   return (
     <div>
       <label>
-        <input type="checkbox" checked={checked} onChange={onToggle} />
+        <input type='checkbox' checked={checked} onChange={onToggle} />
         {description}
       </label>
     </div>
   );
 };
 
-const TaskGroup = ({ group, onToggle, index }) => {
+const TaskGroup = ({group, onToggle, index}) => {
   const [isExpand, setIsExpand] = useState(false);
-  const { name, tasks } = group;
+  const {name, tasks} = group;
 
   return (
     <fieldset>
@@ -91,7 +91,7 @@ const TaskGroup = ({ group, onToggle, index }) => {
   );
 };
 
-const Accordion = ({ data, onToggle }) => {
+const Accordion = ({data, onToggle}) => {
   return (
     <div>
       {data.map((group, index) => (
@@ -110,12 +110,10 @@ const App = () => {
     }, 1000);
   }, []);
 
-  const handleToggle = (toggledTask) => {
-    const updatedTasksData = tasksData.map((group) => ({
+  const handleToggle = toggledTask => {
+    const updatedTasksData = tasksData.map(group => ({
       ...group,
-      tasks: group.tasks.map((task) =>
-        task === toggledTask ? { ...task, checked: !task.checked } : task
-      ),
+      tasks: group.tasks.map(task => (task === toggledTask ? {...task, checked: !task.checked} : task))
     }));
     setTasksData(updatedTasksData);
   };
@@ -129,14 +127,17 @@ const App = () => {
         }, 0)
       );
     }, 0);
-    return (sumValues * 100) / tasksData.reduce((acc, group) => {
-      return (
-        acc +
-        group.tasks.reduce((acc, task) => {
-          return acc + task.value;
-        }, 0)
-      );
-    }, 0);
+    return (
+      (sumValues * 100) /
+      tasksData.reduce((acc, group) => {
+        return (
+          acc +
+          group.tasks.reduce((acc, task) => {
+            return acc + task.value;
+          }, 0)
+        );
+      }, 0)
+    );
   };
 
   const progress = calculateProgress();

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Wrapper, LabelText, Checkbox } from './style';
 
 const Task = ({ task, onToggle }) => {
@@ -19,3 +20,12 @@ const Task = ({ task, onToggle }) => {
 };
 
 export default Task;
+
+Task.propTypes = {
+  task: PropTypes.shape({
+    description: PropTypes.string.isRequired,
+    value: PropTypes.number.isRequired,
+    checked: PropTypes.bool.isRequired,
+  }).isRequired,
+  onToggle: PropTypes.func.isRequired,
+};

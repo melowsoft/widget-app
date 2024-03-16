@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Task from '../Task';
 import {MdExpandMore, MdExpandLess} from 'react-icons/md';
 import {PiClipboardTextLight} from 'react-icons/pi';
@@ -40,6 +41,20 @@ const TaskGroup = ({group, onToggle}) => {
       </fieldset>
     </Wrapper>
   );
+};
+
+TaskGroup.propTypes = {
+  group: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    tasks: PropTypes.arrayOf(
+      PropTypes.shape({
+        description: PropTypes.string.isRequired,
+        value: PropTypes.number.isRequired,
+        checked: PropTypes.bool.isRequired,
+      })
+    ).isRequired,
+  }).isRequired,
+  onToggle: PropTypes.func.isRequired,
 };
 
 export default TaskGroup;

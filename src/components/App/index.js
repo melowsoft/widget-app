@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import ProgressBar from '@ramonak/react-progress-bar';
 import Accordion from '../Accordion';
 import { Main } from './style';
@@ -13,12 +14,8 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(API_URL);
-        if (!response.ok) {
-          throw new Error('Failed to fetch data');
-        }
-        const data = await response.json();
-        setTasksData(data);
+        const response = await axios.get(API_URL); 
+        setTasksData(response.data);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -32,7 +29,7 @@ const App = () => {
   const handleToggle = toggledTask => {
     const updatedTasksData = tasksData.map(group => ({
       ...group,
-      tasks: group.tasks.map(task => (task === toggledTask ? {...task, checked: !task.checked} : task))
+      tasks: group.tasks.map(task => (task === toggledTask ? { ...task, checked: !task.checked } : task))
     }));
     setTasksData(updatedTasksData);
   };

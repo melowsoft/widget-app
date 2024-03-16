@@ -48,3 +48,12 @@ To run the application locally, use the following command:
 
 ```bash
 yarn start
+```
+
+## Testing
+
+To run tall the test on the app locally, use the following command:
+
+```bash
+yarn test
+```
